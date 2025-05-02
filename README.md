@@ -1,30 +1,34 @@
 # IV1350 Seminar 3 – Point of Sale System
 
 ## Description
-This project is a simplified **Point of Sale (POS)** system implemented in Java as part of the IV1350 Object-Oriented Design course at Stockholm University. It is based on the design created in Seminar 2 and follows object-oriented best practices such as high cohesion, low coupling, and encapsulation.
 
-The POS system simulates a checkout flow with:
-- Start of sale
-- Item registration (e.g., *Banan eko 2.15kg*, *Felix Potatisbullar*)
-- Calculation of running total including VAT
-- Sale finalization and payment
-- Receipt printing
+This project is a simplified Point of Sale (POS) system developed in Java for the course IV1350: Object-Oriented Design at Stockholm University (VT2025). It follows principles of object-oriented programming such as high cohesion, low coupling, and layered architecture.
 
-All operations are simulated via hardcoded calls in the `View` class.
+The system simulates a checkout process, where a cashier can:
+- Start a new sale
+- Register items (such as Banan eko 2.15kg and Felix Potatisbullar)
+- View a running total including VAT
+- Finalize the sale
+- Handle payment and calculate change
+- Print a receipt
+
+All operations are triggered via hardcoded method calls in the `View` class. Output is printed directly to the console.
 
 ## Project Structure
 
-| Package | Description |
-|--------|-------------|
-| `controller` | Handles communication between view, model, and integration layers |
-| `model` | Contains business logic (`Sale`, `Item`, `Receipt`, etc.) |
-| `integration` | Simulates external systems (inventory, accounting, printer) |
-| `view` | Simulated UI via `runFakeExecution()` |
-| `startup` | Contains `Main.java` to start the system |
+The project is divided into the following packages:
 
-##  How to Run
+- `controller` – Handles coordination between the view, model, and integration layers
+- `model` – Contains the business logic (Sale, Item, Receipt, and related DTOs)
+- `integration` – Simulates external systems such as the inventory, accounting system, and printer
+- `view` – Contains the simulated user interface (`runFakeExecution`)
+- `startup` – Includes the main class that launches the program
+
+## How to Run
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/lowthe1st/possystem-seminar3.git
-   cd possystem-seminar3
+https://github.com/lowthe1st/sem3.git
+
+2. Open the project in NetBeans or another Java IDE.
+
+3. Run `Main.java`
