@@ -24,7 +24,7 @@ The project is divided into the following packages:
 - `view` – Contains the simulated user interface (`runFakeExecution`)
 - `startup` – Includes the main class that launches the program
 
-## How to Run
+## How to Run?
 
 1. Clone the repository:
 https://github.com/lowthe1st/sem3.git
