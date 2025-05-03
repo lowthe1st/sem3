@@ -4,21 +4,21 @@ import se.kth.iv1350.possystem.model.Receipt;
 import se.kth.iv1350.possystem.model.Item;
 
 /**
- * Simulates an external printer that prints the receipt for a completed sale.
+ * Simulates an external printer that prints out a receipt after a sale.
  */
 public class Printer {
 
     /**
-     * Creates a new instance of the external printer.
+     * Creates a new printer instance.
      */
     public Printer() {
-        // Empty constructor
+        // Nothing needed here right now.
     }
 
     /**
-     * Prints the receipt containing the details of the completed sale.
+     * Prints a receipt with the sale details.
      *
-     * @param receipt The receipt to be printed.
+     * @param receipt The receipt to print.
      */
     public void print(Receipt receipt) {
         System.out.println("-------- Receipt --------");
@@ -46,5 +46,6 @@ public class Printer {
         System.out.println("--------------------------");
     }
 }
+
 
 
