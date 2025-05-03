@@ -10,7 +10,8 @@ import se.kth.iv1350.possystem.integration.Printer;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests the View class to ensure the simulated run does not throw errors.
+ * Tests the View class by running a full sale simulation
+ * and checking that no exceptions are thrown.
  */
 public class ViewTest {
 
@@ -21,18 +22,17 @@ public class ViewTest {
         Printer printer = new Printer();
         ExternalAccountingSystem accounting = new ExternalAccountingSystem();
         ExternalInventorySystem inventory = new ExternalInventorySystem();
-        inventory.initializeStoreItems(); // Important: preload items
+        inventory.initializeStoreItems(); // Load the items into inventory
 
         Controller controller = new Controller(printer, accounting, inventory);
         view = new View(controller);
     }
 
     /**
-     * Verifies that the simulated execution runs without throwing exceptions.
+     * Makes sure that runFakeExecution() completes without crashing.
      */
     @Test
     public void testRunFakeExecutionDoesNotCrash() {
-        assertDoesNotThrow(() -> view.runFakeExecution(), "runFakeExecution() should not throw any exceptions.");
+        assertDoesNotThrow(() -> view.runFakeExecution(), "runFakeExecution() should run without throwing anything.");
     }
 }
-
