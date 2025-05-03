@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a sale transaction involving one customer and one or more items.
- * Handles item registration, price and VAT calculation, and generates sale information.
+ * Represents a sale made to a customer.
+ * It keeps track of items, their quantities, total price and VAT.
  */
 public class Sale {
     private final LocalTime timeOfSale;
@@ -18,7 +18,7 @@ public class Sale {
     private Receipt receipt;
 
     /**
-     * Creates a new Sale instance and initializes the item list and sale timestamp.
+     * Creates a new sale and sets the time it started.
      */
     public Sale() {
         this.timeOfSale = LocalTime.now();
@@ -28,38 +28,29 @@ public class Sale {
     }
 
     /**
-     * Returns the list of items added to the sale.
-     *
-     * @return A list of all items in the sale.
+     * Returns all items added during the sale.
      */
     public List<Item> getItems() {
         return this.items;
     }
 
     /**
-     * Returns the quantity for each item in the sale.
-     * The index in this list corresponds to the index in the items list.
-     *
-     * @return List of item quantities.
+     * Returns the quantity for each item.
+     * Index in this list matches index in the item list.
      */
     public List<Integer> getCustomerItemsQuantity() {
         return this.itemQuantities;
     }
 
     /**
-     * Returns a data object with the current sale information.
-     *
-     * @return A SaleDTO with the latest data.
+     * Returns current information about the sale.
      */
     public SaleDTO getSaleInformation() {
         return this.saleInformation;
     }
 
     /**
-     * Adds an item to the sale, or updates the quantity if it already exists.
-     *
-     * @param item The item to add.
-     * @param quantity The number of units to add.
+     * Adds an item to the sale. If it's already in the list, the quantity is increased.
      */
     public void addItem(Item item, int quantity) {
         updateTotalVAT(item.getItemDTO().getVAT(), quantity);
@@ -68,44 +59,26 @@ public class Sale {
     }
 
     /**
-     * Creates and returns a receipt based on the current sale state.
-     *
-     * @param sale The completed sale.
-     * @return The generated receipt.
+     * Returns a receipt based on this sale.
      */
     public Receipt getReceipt(Sale sale) {
         this.receipt = new Receipt(sale.getSaleInformation());
         return receipt;
     }
 
-    /**
-     * Updates the total price based on the item's price and VAT.
-     *
-     * @param price The unit price of the item.
-     * @param vat The VAT rate of the item.
-     * @param quantity The number of items sold.
-     */
     private void updateTotalPrice(double price, double vat, int quantity) {
         this.totalPrice += (price + vat) * quantity;
         updateSaleInformation();
     }
 
-    /**
-     * Updates the total VAT amount for the sale.
-     *
-     * @param vat The VAT rate per item.
-     * @param quantity The number of items.
-     */
     private void updateTotalVAT(double vat, int quantity) {
         this.totalVAT += vat * quantity;
         updateSaleInformation();
     }
 
     /**
-     * Adds the item to the item list, or increases quantity if already added.
-     *
-     * @param item The item being processed.
-     * @param quantity The number of units being added.
+     * If the item has already been added, the quantity is updated.
+     * Otherwise, it is added as a new item.
      */
     private void handleDuplicateOrNewItem(Item item, int quantity) {
         for (int i = 0; i < items.size(); i++) {
@@ -120,11 +93,9 @@ public class Sale {
     }
 
     /**
-     * Updates the SaleDTO object with the latest sale data.
+     * Updates the SaleDTO to reflect the current state of the sale.
      */
     private void updateSaleInformation() {
         this.saleInformation = new SaleDTO(timeOfSale, totalVAT, totalPrice, items);
     }
 }
-
-
