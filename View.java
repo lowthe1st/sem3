@@ -8,24 +8,24 @@ import se.kth.iv1350.possystem.model.Item;
 import java.util.List;
 
 /**
- * Represents the user interface (UI) of the application.
- * Simulates a hardcoded execution of a sale by calling system operations through the controller.
+ * This class represents the user interface.
+ * It simulates a hardcoded sale by calling the controller's methods in the correct order.
  */
 public class View {
     private final Controller controller;
 
     /**
-     * Creates a new instance of View that uses the given controller for all system interactions.
+     * Creates a new view that uses the given controller to interact with the rest of the system.
      *
-     * @param controller The controller to interact with other layers of the application.
+     * @param controller The controller used to connect to other layers.
      */
     public View(Controller controller) {
         this.controller = controller;
     }
 
     /**
-     * Performs a simulated sale by invoking system operations in the correct order.
-     * Prints out each step to the console.
+     * Simulates a complete sale from start to finish.
+     * Prints the flow to the console to show how the system behaves.
      */
     public void runFakeExecution() {
         controller.startSale();
@@ -54,10 +54,10 @@ public class View {
     }
 
     /**
-     * Prints details of a single item from a SaleDTO.
+     * Prints information about a specific item from the sale.
      *
-     * @param saleDTO The current sale state.
-     * @param index The index of the item to print.
+     * @param saleDTO The current state of the sale.
+     * @param index The index of the item in the list.
      */
     private void printItemInfo(SaleDTO saleDTO, int index) {
         List<Item> items = saleDTO.getItems();
