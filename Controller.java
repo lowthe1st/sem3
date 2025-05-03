@@ -10,8 +10,7 @@ import se.kth.iv1350.possystem.model.Sale;
 import se.kth.iv1350.possystem.model.SaleDTO;
 
 /**
- * The Controller handles all interactions between the view,
- * the model, and the external systems in the POS system.
+ * Handles all communication between the view and the rest of the system.
  */
 public class Controller {
     private final ExternalAccountingSystem accounting;
@@ -20,23 +19,21 @@ public class Controller {
     private Sale sale;
 
     /**
-     * Creates a new instance of Controller.
+     * Creates a new controller.
      *
-     * @param printer The external printer system.
-     * @param accounting The external accounting system.
-     * @param inventory The external inventory system.
+     * @param printer The printer used for printing receipts.
+     * @param accounting The accounting system used to update store balance.
+     * @param inventory The inventory system containing store items.
      */
     public Controller(Printer printer, ExternalAccountingSystem accounting, ExternalInventorySystem inventory) {
         this.printer = printer;
         this.accounting = accounting;
         this.inventory = inventory;
-        inventory.initializeStoreItems(); // Better method name
+        inventory.initializeStoreItems(); // Loads example items into the system
     }
 
     /**
-     * Starts a new sale. This method must be called first.
-     *
-     * @return A DTO containing the initial sale state.
+     * Starts a new sale.
      */
     public SaleDTO startSale() {
         this.sale = new Sale();
@@ -44,11 +41,11 @@ public class Controller {
     }
 
     /**
-     * Adds an item to the current sale.
+     * Adds an item to the sale.
      *
-     * @param barCode The barcode identifying the item.
-     * @param quantity The quantity of the item.
-     * @return A DTO with updated sale information, or null if the item is not found or not in stock.
+     * @param barCode The barcode of the item.
+     * @param quantity How many the customer wants.
+     * @return Updated sale info, or null if item isn't found or out of stock.
      */
     public SaleDTO enterItem(int barCode, int quantity) {
         Item item = inventory.search(barCode);
@@ -61,9 +58,7 @@ public class Controller {
     }
 
     /**
-     * Ends the sale and updates the inventory accordingly.
-     *
-     * @return A DTO containing final sale information.
+     * Ends the sale and updates inventory quantities.
      */
     public SaleDTO endSale() {
         List<Item> items = sale.getItems();
@@ -72,7 +67,6 @@ public class Controller {
         for (int i = 0; i < items.size(); i++) {
             Item soldItem = items.get(i);
             int quantitySold = quantities.get(i);
-
             inventory.updateItemQuantity(soldItem.getID(), quantitySold);
         }
 
@@ -80,10 +74,10 @@ public class Controller {
     }
 
     /**
-     * Registers the payment, calculates change, and updates the accounting system.
+     * Handles payment and updates accounting.
      *
-     * @param amount The amount paid by the customer.
-     * @return A Payment object containing the change and payment status.
+     * @param amount The amount the customer paid.
+     * @return A payment object showing change and status.
      */
     public Payment pay(double amount) {
         double totalPrice = sale.getTotalPrice();
@@ -101,7 +95,7 @@ public class Controller {
     }
 
     /**
-     * Prints the receipt for the current sale using the external printer.
+     * Prints the receipt for the finished sale.
      */
     public void printReceipt() {
         printer.print(sale.getReceipt(sale));
