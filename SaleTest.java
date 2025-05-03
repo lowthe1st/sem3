@@ -1,4 +1,4 @@
-/package se.kth.iv1350.possystem.model;
+package se.kth.iv1350.possystem.model;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,19 +29,19 @@ public class SaleTest {
     @Test
     public void testGetItemsInitiallyEmpty() {
         List<Item> result = sale.getItems();
-        assertTrue(result.isEmpty(), "Expected item list to be empty initially.");
+        assertTrue(result.isEmpty(), "Item list should be empty when sale starts.");
     }
 
     @Test
     public void testGetCustomerItemsQuantityInitiallyEmpty() {
         List<Integer> result = sale.getCustomerItemsQuantity();
-        assertTrue(result.isEmpty(), "Expected customer item quantity list to be empty initially.");
+        assertTrue(result.isEmpty(), "Quantity list should be empty before any items are added.");
     }
 
     @Test
     public void testGetSaleInformationNotNull() {
         SaleDTO result = sale.getSaleInformation();
-        assertNotNull(result, "Expected SaleDTO to be initialized.");
+        assertNotNull(result, "SaleDTO should not be null after creating sale.");
     }
 
     @Test
@@ -56,10 +56,10 @@ public class SaleTest {
         List<Integer> quantities = sale.getCustomerItemsQuantity();
         SaleDTO info = sale.getSaleInformation();
 
-        assertEquals(1, items.size(), "Should contain exactly one item after adding.");
-        assertEquals(quantity, quantities.get(0), "Stored quantity should match the added quantity.");
-        assertEquals((bananaPrice + bananaVAT) * quantity, info.getTotalPrice(), 0.01, "Total price not calculated correctly.");
-        assertEquals(bananaVAT * quantity, info.getTotalVAT(), 0.01, "Total VAT not calculated correctly.");
+        assertEquals(1, items.size(), "Should contain exactly one item.");
+        assertEquals(quantity, quantities.get(0), "Quantity should match what was added.");
+        assertEquals((bananaPrice + bananaVAT) * quantity, info.getTotalPrice(), 0.01, "Total price is incorrect.");
+        assertEquals(bananaVAT * quantity, info.getTotalVAT(), 0.01, "Total VAT is incorrect.");
     }
 
     @Test
@@ -74,13 +74,12 @@ public class SaleTest {
         sale.addItem(potatisItem, 1);
 
         List<Item> items = sale.getItems();
-        assertEquals(2, items.size(), "Should contain two items.");
+        assertEquals(2, items.size(), "Should contain two different items.");
     }
 
     @Test
     public void testGetReceiptReturnsNotNull() {
         Receipt result = sale.getReceipt(sale);
-        assertNotNull(result, "Receipt should not be null.");
+        assertNotNull(result, "Receipt should be created and not null.");
     }
 }
-
