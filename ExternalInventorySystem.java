@@ -6,37 +6,35 @@ import se.kth.iv1350.possystem.model.Item;
 import se.kth.iv1350.possystem.model.ItemDTO;
 
 /**
- * Simulates an external inventory system. Contains a hardcoded list
- * of items available in the store.
+ * Simulates the store's external inventory system.
+ * Contains a hardcoded list of available items.
  */
 public class ExternalInventorySystem {
     private final List<Item> storeItems = new ArrayList<>();
     private final List<ItemDTO> itemDTOs = new ArrayList<>();
 
     /**
-     * Creates a new instance of the external inventory system.
+     * Creates the inventory system. Items are added later.
      */
     public ExternalInventorySystem() {
-        // Constructor left intentionally empty.
+        // No items added in constructor, handled separately.
     }
 
     /**
-     * Returns the current list of items available in the store.
-     *
-     * @return A list of all items in inventory.
+     * Returns all items currently in the store.
      */
     public List<Item> getStoreItems() {
-        return new ArrayList<>(this.storeItems); // Return copy for encapsulation
+        return new ArrayList<>(this.storeItems); // Return copy to protect list
     }
 
     /**
-     * Initializes the inventory with predefined items.
-     * This simulates loading items from an external source.
+     * Adds some example items to the inventory.
+     * This simulates loading from a real database.
      */
     public void initializeStoreItems() {
-        itemDTOs.add(new ItemDTO("Apples 5kg", 130.0, 8, 123));
-        itemDTOs.add(new ItemDTO("Ketchup", 10.0, 5, 234));
-        itemDTOs.add(new ItemDTO("Fish 100g", 20.0, 6, 345));
+        itemDTOs.add(new ItemDTO("Banan eko 2.15kg", 49.24, 2.95, 1));
+        itemDTOs.add(new ItemDTO("Felix Potatisbullar", 17.90, 2.15, 2));
+        itemDTOs.add(new ItemDTO("Fish 100g", 20.0, 6.0, 3));
 
         storeItems.add(new Item(1, itemDTOs.get(0), 100));
         storeItems.add(new Item(2, itemDTOs.get(1), 100));
@@ -44,10 +42,10 @@ public class ExternalInventorySystem {
     }
 
     /**
-     * Searches for an item in the inventory using its barcode.
+     * Looks up an item in the inventory by barcode.
      *
-     * @param barCode The unique barcode that identifies the item.
-     * @return The corresponding item if found; otherwise, null.
+     * @param barCode The item's barcode.
+     * @return The item if found, otherwise null.
      */
     public Item search(int barCode) {
         for (Item item : storeItems) {
@@ -59,10 +57,10 @@ public class ExternalInventorySystem {
     }
 
     /**
-     * Updates the inventory quantity for a specific item.
+     * Reduces the quantity of an item after it's sold.
      *
-     * @param barCode The barcode of the item to update.
-     * @param quantitySold The number of items sold to deduct from stock.
+     * @param barCode The barcode of the sold item.
+     * @param quantitySold How many were sold.
      */
     public void updateItemQuantity(int barCode, int quantitySold) {
         for (Item item : storeItems) {
@@ -73,4 +71,3 @@ public class ExternalInventorySystem {
         }
     }
 }
-
