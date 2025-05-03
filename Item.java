@@ -1,8 +1,8 @@
 package se.kth.iv1350.possystem.model;
 
 /**
- * Represents a specific item in the store's inventory.
- * Contains product information and the current stock quantity.
+ * Represents an item that exists in the store’s inventory.
+ * Stores product info and how many are available.
  */
 public class Item {
     private final ItemDTO itemDTO;
@@ -10,11 +10,11 @@ public class Item {
     private int storeQuantity;
 
     /**
-     * Creates a new instance of an Item.
+     * Creates a new item in the system.
      *
-     * @param barCode The unique barcode identifying the item.
-     * @param itemDTO The data transfer object containing item details.
-     * @param quantity The initial quantity of the item in stock.
+     * @param barCode The barcode that identifies the item.
+     * @param itemDTO Object with details like name, price and VAT.
+     * @param quantity How many units are in stock.
      */
     public Item(int barCode, ItemDTO itemDTO, int quantity) {
         this.barCode = barCode;
@@ -23,34 +23,28 @@ public class Item {
     }
 
     /**
-     * Returns the item’s data transfer object containing its description.
-     *
-     * @return The item’s DTO.
+     * Gets the item’s basic info (name, price, etc).
      */
     public ItemDTO getItemDTO() {
         return this.itemDTO;
     }
 
     /**
-     * Returns the barcode of this item.
-     *
-     * @return The item's barcode.
+     * Returns this item’s barcode.
      */
     public int getBarCode() {
         return this.barCode;
     }
 
     /**
-     * Returns the quantity of this item currently in stock.
-     *
-     * @return The quantity available in store.
+     * Returns how many units are in stock.
      */
     public int getStoreQuantity() {
         return this.storeQuantity;
     }
 
     /**
-     * Reduces the store quantity based on the amount sold.
+     * Updates the quantity after a sale.
      *
      * @param amountSold The number of units sold.
      */
