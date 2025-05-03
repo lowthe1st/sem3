@@ -1,34 +1,32 @@
 package se.kth.iv1350.possystem.integration;
 
 /**
- * Simulates an external accounting system that handles the store's financial transactions.
+ * Simulates the store’s external accounting system.
+ * Keeps track of how much money the store has received.
  */
 public class ExternalAccountingSystem {
     private double storeBalance;
 
     /**
-     * Creates a new instance of the external accounting system with a starting balance.
+     * Creates a new accounting system with a starting balance.
      */
     public ExternalAccountingSystem() {
         this.storeBalance = 200.0;
     }
 
     /**
-     * Updates the store balance by adding the total amount from a completed sale.
+     * Updates the store balance when a sale is completed.
      *
-     * @param totalPrice The total price received from the sale.
+     * @param totalPrice The amount received from the customer.
      */
     public void update(double totalPrice) {
         this.storeBalance += totalPrice;
     }
 
     /**
-     * Returns the store's current balance.
-     *
-     * @return The store's total balance after transactions.
+     * Gets the current balance of the store.
      */
     public double getStoreBalance() {
         return this.storeBalance;
     }
 }
-
