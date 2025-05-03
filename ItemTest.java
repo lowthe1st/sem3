@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the Item class using "Banan eko 2.15kg" as test item.
+ * Tests the Item class using "Banan eko 2.15kg" as example item.
  */
 public class ItemTest {
     private Item item;
@@ -17,7 +17,7 @@ public class ItemTest {
     private final double VAT = 2.95;
 
     /**
-     * Sets up a test item before each test.
+     * Sets up a fresh item before each test.
      */
     @BeforeEach
     public void setUp() {
@@ -26,42 +26,43 @@ public class ItemTest {
     }
 
     /**
-     * Tests that the correct ItemDTO is returned.
+     * Checks that getItemDTO() returns the correct object and values.
      */
     @Test
     public void testGetItemDTO() {
         ItemDTO result = item.getItemDTO();
-        assertEquals(itemDTO, result, "ItemDTO returned by getItemDTO() is incorrect.");
-        assertEquals(itemName, result.getItemName(), "Item name mismatch.");
-        assertEquals(price, result.getPrice(), 0.001, "Item price mismatch.");
+        assertEquals(itemDTO, result, "getItemDTO() returned wrong object.");
+        assertEquals(itemName, result.getItemName(), "Wrong item name.");
+        assertEquals(price, result.getPrice(), 0.001, "Wrong price.");
     }
 
     /**
-     * Tests that the barcode is returned correctly.
+     * Checks that the barcode is returned correctly.
      */
     @Test
     public void testGetBarCode() {
         int result = item.getBarCode();
-        assertEquals(barCode, result, "Barcode returned by getBarCode() is incorrect.");
+        assertEquals(barCode, result, "getBarCode() returned the wrong value.");
     }
 
     /**
-     * Tests that the store quantity is returned correctly.
+     * Checks that the store quantity is set and returned correctly.
      */
     @Test
     public void testGetStoreQuantity() {
         int result = item.getStoreQuantity();
-        assertEquals(quantity, result, "Initial store quantity is incorrect.");
+        assertEquals(quantity, result, "Initial quantity is incorrect.");
     }
 
     /**
-     * Tests that the store quantity is reduced correctly after a sale.
+     * Verifies that the quantity is updated correctly after a sale.
      */
     @Test
     public void testUpdateQuantity() {
         int amountSold = 3;
         item.updateQuantity(amountSold);
         int result = item.getStoreQuantity();
-        assertEquals(quantity - amountSold, result, "Store quantity not reduced correctly after update.");
+        assertEquals(quantity - amountSold, result, "Quantity wasn't reduced as expected.");
     }
 }
+
