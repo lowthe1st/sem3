@@ -7,16 +7,12 @@ import se.kth.iv1350.possystem.integration.Printer;
 import se.kth.iv1350.possystem.view.View;
 
 /**
- * Starts the entire application. Contains the {@code main} method that initializes
- * the system and triggers a simulated sale through the view.
+ * Starts the application. Creates all parts of the system and runs a fake sale.
  */
 public class Main {
 
     /**
-     * The main method used to launch the Point of Sale application.
-     * No command-line arguments are required.
-     *
-     * @param args This application does not use any command-line arguments.
+     * Entry point of the program. No command-line arguments are used.
      */
     public static void main(String[] args) {
         Printer printer = new Printer();
@@ -26,6 +22,6 @@ public class Main {
         Controller controller = new Controller(printer, accounting, inventory);
         View view = new View(controller);
 
-        view.runFakeExecution(); // Simulated sale
+        view.runFakeExecution(); // Runs a hardcoded example sale
     }
 }
