@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A data transfer object (DTO) containing information about a completed sale.
- * Includes the time of sale, total VAT, total price, and the list of items sold.
+ * A simple object used to send sale information between different parts of the system.
+ * It includes time of sale, total VAT, total price, and a list of sold items.
  */
 public class SaleDTO {
     private final LocalTime time;
@@ -15,53 +15,45 @@ public class SaleDTO {
     private final List<Item> items;
 
     /**
-     * Creates a new instance of SaleDTO.
+     * Creates a new SaleDTO with the given data.
      *
-     * @param time The time when the sale was initiated.
-     * @param totalVAT The total VAT accumulated from all sold items.
-     * @param totalPrice The total price including VAT for the entire sale.
-     * @param items The list of items sold during the sale.
+     * @param time The time when the sale started.
+     * @param totalVAT Total VAT from all items in the sale.
+     * @param totalPrice Total price including VAT.
+     * @param items The items included in the sale.
      */
     public SaleDTO(LocalTime time, double totalVAT, double totalPrice, List<Item> items) {
         this.time = time;
         this.totalVAT = totalVAT;
         this.totalPrice = totalPrice;
-        this.items = new ArrayList<>(items); // Defensively copied
+        this.items = new ArrayList<>(items); // Avoid exposing internal list
     }
 
     /**
-     * Returns the time of the sale.
-     *
-     * @return The sale's timestamp.
+     * Gets the time of the sale.
      */
     public LocalTime getTime() {
         return this.time;
     }
 
     /**
-     * Returns the total VAT for the sale.
-     *
-     * @return The total VAT amount.
+     * Gets the total VAT.
      */
     public double getTotalVAT() {
         return this.totalVAT;
     }
 
     /**
-     * Returns the total price of the sale including VAT.
-     *
-     * @return The total price.
+     * Gets the total price including VAT.
      */
     public double getTotalPrice() {
         return this.totalPrice;
     }
 
     /**
-     * Returns a copy of the list of items sold.
-     *
-     * @return A list containing the sold items.
+     * Returns the list of items in the sale.
      */
     public List<Item> getItems() {
-        return new ArrayList<>(this.items); // Defensive copy
+        return new ArrayList<>(this.items); // Return a copy to keep original safe
     }
 }
