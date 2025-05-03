@@ -1,18 +1,17 @@
 package se.kth.iv1350.possystem.model;
 
 /**
- * Represents the result of a customer's payment,
- * including the change to be returned and a status message.
+ * Holds info about a payment, like how much change to give and the payment status.
  */
 public class Payment {
     private final double change;
     private final String message;
 
     /**
-     * Creates a new Payment instance.
+     * Creates a new payment result.
      *
-     * @param change The amount of change to return to the customer.
-     * @param message A status message related to the payment (e.g. "Approved", "Too little money").
+     * @param change How much money to give back.
+     * @param message A message like "Approved" or "Too little money".
      */
     public Payment(double change, String message) {
         this.change = change;
@@ -20,22 +19,16 @@ public class Payment {
     }
 
     /**
-     * Returns the amount of change to give back to the customer.
-     *
-     * @return The change amount.
+     * Gets the change to return to the customer.
      */
     public double getChange() {
         return this.change;
     }
 
     /**
-     * Returns the payment status message.
-     *
-     * @return A message describing the payment result.
+     * Gets the status message for the payment.
      */
     public String getMessage() {
         return this.message;
     }
 }
-
-
