@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the ExternalAccountingSystem class.
+ * Tests for the ExternalAccountingSystem class.
  */
 public class ExternalAccountingSystemTest {
     private ExternalAccountingSystem accountingSystem;
 
     /**
-     * Sets up a fresh accounting system for each test.
+     * Creates a fresh accounting system before each test.
      */
     @BeforeEach
     public void setUp() {
@@ -19,25 +19,25 @@ public class ExternalAccountingSystemTest {
     }
 
     /**
-     * Tests that the store balance increases correctly after a banana sale.
+     * Checks that the store balance is updated correctly after a banana sale.
      */
     @Test
     public void testUpdateWithBananEko() {
-        double totalPrice = 49.24; // Banan eko 2.15kg
+        double totalPrice = 49.24; // Price for Banan eko 2.15kg
         double initialBalance = accountingSystem.getStoreBalance();
         accountingSystem.update(totalPrice);
         assertEquals(initialBalance + totalPrice, accountingSystem.getStoreBalance(),
-                "Store balance should be updated correctly after banana sale.");
+                "Balance should increase by the sale amount.");
     }
 
     /**
-     * Tests that no change happens if no amount is paid.
+     * Checks that the balance stays the same if nothing is paid.
      */
     @Test
     public void testUpdateWithZero() {
         double initialBalance = accountingSystem.getStoreBalance();
         accountingSystem.update(0.0);
         assertEquals(initialBalance, accountingSystem.getStoreBalance(),
-                "Store balance should remain the same when updated with 0.");
+                "Balance should not change when updated with 0.");
     }
 }
